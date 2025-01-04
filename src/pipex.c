@@ -12,6 +12,13 @@
 
 #include "../include/pipex.h"
 
+void	exit_handler(int n_exit)
+{
+	if (n_exit == 1)
+		ft_putstr_fd("./pipex infile cmd cmd outfile\n", 2);
+	exit(0);
+}
+
 void	exec(char *cmd, char **env)
 {
 	char	**s_cmd;
@@ -58,7 +65,7 @@ int	main(int argc, char **argv, char **env)
 	if (argc != 5)
 		exit(1);
 	if (pipe(pipe_fd) == -1)
-		exit(-1);
+		exit_handler(-1);
 	pid = fork();
 	if (pid == -1)
 		exit(-1);

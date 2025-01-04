@@ -2,7 +2,8 @@ NAME 		= pipex
 CC 			= gcc
 CFLAGS 		= -Wall -Wextra -Werror
 LIB 		= libft/libft.a
-SRC 		= src/pipex.c
+SRC 		= src/pipex.c \
+			src/pipex_utils.c \
 
 OBJ 		= $(SRC:.c=.o)
 

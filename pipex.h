@@ -13,7 +13,7 @@
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include "../libft/includes/libft.h"
+# include "libft/includes/libft.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <sys/types.h>
@@ -32,6 +32,6 @@ int		open_file(char *file, int in_or_out);
 void	ft_free_tab(char **tab);
 char	*my_getenv(char *name, char **env);
 char	*get_path(char *cmd, char **env);
-int	ft_strcmp(char *s1, char *s2);
+int		ft_strcmp(char *s1, char *s2);
 
 #endif

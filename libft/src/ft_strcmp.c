@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putsr_fd.c                                      :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgarsaul <mgarsaul@student.42.fr>          #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-10-17 10:16:02 by mgarsaul          #+#    #+#             */
-/*   Updated: 2024-10-17 10:16:02 by mgarsaul         ###   ########.fr       */
+/*   Created: 2025-01-13 14:20:26 by mgarsaul          #+#    #+#             */
+/*   Updated: 2025-01-13 14:20:26 by mgarsaul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-void	ft_putstr_fd(char *str, int fd)
+int	ft_strcmp(char *s1, char *s2)
 {
-	if (!str)
-		return ;
-	write(fd, str, ft_strlen(str));
-}
-/*
-int	main(void)
-{
-	int	fd = open("output.txt", O_WRONLY | O_CREAT, 0644);
+	size_t	i;
 
-	ft_putstr_fd("hola", fd);
-	close(fd);
-	return 0;
-}*/
+	i = 0;
+	if (!s1)
+		return (1);
+	while (s1[i] || s2[i])
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i++;
+	}
+	return (0);
+}

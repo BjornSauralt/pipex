@@ -12,13 +12,6 @@
 
 #include "pipex.h"
 
-void	exit_handler(int n_exit)
-{
-	if (n_exit == 1)
-		ft_putstr_fd("./pipex infile cmd cmd outfile\n", 2);
-	exit(0);
-}
-
 void	exec(char *cmd, char **env)
 {
 	char	**s_cmd;
@@ -26,13 +19,23 @@ void	exec(char *cmd, char **env)
 
 	s_cmd = ft_split(cmd, ' ');
 	path = get_path(s_cmd[0], env);
-	if (execve(path, s_cmd, env) == -1)
+	if (!path)
 	{
-		ft_putstr_fd("pipex: commande introuvable :", 2);
+		ft_putstr_fd("pipex: commande introuvable: ", 2);
 		ft_putendl_fd(s_cmd[0], 2);
 		ft_free_tab(s_cmd);
-		exit(0);
+		exit(1);
 	}
+	ft_putstr_fd("Exécution de la commande: ", 2);
+	ft_putendl_fd(path, 2);
+	if (execve(path, s_cmd, env) == -1)
+	{
+		ft_putstr_fd("pipex: erreur lors de l'exécution de la commande: ", 2);
+		ft_putendl_fd(s_cmd[0], 2);
+		ft_free_tab(s_cmd);
+		exit(1);
+	}
+	ft_free_tab(s_cmd);
 }
 
 void	enfant(char **av, int *pipe_fd, char **env)

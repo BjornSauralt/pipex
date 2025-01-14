@@ -30,8 +30,7 @@ void	parent(char **av, int *pipe_fd, char **env);
 void	exit_handler(int n_exit);
 int		open_file(char *file, int in_or_out);
 void	ft_free_tab(char **tab);
-char	*my_getenv(char *name, char **env);
+char	*ft_getenv(char *name, char **env);
 char	*get_path(char *cmd, char **env);
-int		ft_strcmp(char *s1, char *s2);
 
 #endif

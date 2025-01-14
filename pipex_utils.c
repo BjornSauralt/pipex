@@ -12,22 +12,6 @@
 
 #include "pipex.h"
 
-int	ft_strcmp(char *s1, char *s2)
-{
-	size_t	i;
-
-	i = 0;
-	if (!s1)
-		return (1);
-	while (s1[i] || s2[i])
-	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
-		i++;
-	}
-	return (0);
-}
-
 int	open_file(char *file, int in_or_out)
 {
 	int	ret;
@@ -54,7 +38,7 @@ void	ft_free_tab(char **tab)
 	free(tab);
 }
 
-char	*my_getenv(char *name, char **env)
+char	*ft_getenv(char *name, char **env)
 {
 	int		i;
 	int		j;
@@ -87,7 +71,7 @@ char	*get_path(char *cmd, char **env)
 	char	**s_cmd;
 
 	i = -1;
-	allpath = ft_split(my_getenv("PATH", env), ':');
+	allpath = ft_split(ft_getenv("PATH", env), ':');
 	s_cmd = ft_split(cmd, ' ');
 	while (allpath[++i])
 	{
@@ -104,4 +88,11 @@ char	*get_path(char *cmd, char **env)
 	ft_free_tab(allpath);
 	ft_free_tab(s_cmd);
 	return (cmd);
+}
+
+void	exit_handler(int n_exit)
+{
+	if (n_exit == 1)
+		ft_putstr_fd("./pipex infile cmd cmd outfile\n", 2);
+	exit(0);
 }

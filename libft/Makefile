@@ -11,7 +11,7 @@ CFILE        =        ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c
         ft_split.c ft_strjoin.c ft_strmapi.c ft_strtrim.c ft_substr.c ft_striteri.c \
         get_next_line.c ft_strncpy.c ft_printchr.c ft_printf.c ft_printhex.c \
         ft_printnbr.c ft_printpercent.c ft_printptr.c ft_printstr.c \
-        ft_printunsigned.c
+        ft_printunsigned.c ft_strcmp.c
 
 CFILE_DIR		=	./src/
 

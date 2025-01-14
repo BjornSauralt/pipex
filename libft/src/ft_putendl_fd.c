@@ -14,21 +14,16 @@
 
 void	ft_putendl_fd(char *str, int fd)
 {
-	int	val;
-
-	val = 0;
-	while (str[val])
-	{
-		write (fd, &str[val], 1);
-		val++;
-	}
+	if (!str)
+		return ;
+	ft_putstr_fd(str, fd);
 	write(fd, "\n", 1);
 }
 /*
 int main(void)
 {
 	int	fd = open("output.txt", O_WRONLY | O_CREAT, 0644);
-    
+	
 	ft_putendl_fd("Hello, World!", fd);
 	close(fd);
 	return 0;

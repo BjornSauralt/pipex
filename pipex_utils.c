@@ -17,9 +17,9 @@ int	open_file(char *file, int in_or_out)
 	int	ret;
 
 	if (in_or_out == 0)
-		ret = open(file, O_RDONLY, 0777);
+		ret = open(file, O_RDONLY);
 	if (in_or_out == 1)
-		ret = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+		ret = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (ret == -1)
 		exit(0);
 	return (ret);
@@ -62,37 +62,47 @@ char	*ft_getenv(char *name, char **env)
 	return (NULL);
 }
 
-char	*get_path(char *cmd, char **env)
+char	*construct_exec_path(char *cmd, char **allpath)
 {
 	int		i;
 	char	*exec;
-	char	**allpath;
 	char	*path_part;
-	char	**s_cmd;
 
 	i = -1;
-	allpath = ft_split(ft_getenv("PATH", env), ':');
-	s_cmd = ft_split(cmd, ' ');
 	while (allpath[++i])
 	{
 		path_part = ft_strjoin(allpath[i], "/");
-		exec = ft_strjoin(path_part, s_cmd[0]);
+		exec = ft_strjoin(path_part, cmd);
 		free(path_part);
 		if (access(exec, F_OK | X_OK) == 0)
-		{
-			ft_free_tab(s_cmd);
 			return (exec);
-		}
 		free(exec);
 	}
-	ft_free_tab(allpath);
-	ft_free_tab(s_cmd);
-	return (cmd);
+	return (NULL);
 }
 
-void	exit_handler(int n_exit)
+char	*get_path(char *cmd, char **env)
 {
-	if (n_exit == 1)
-		ft_putstr_fd("./pipex infile cmd cmd outfile\n", 2);
-	exit(0);
+	char	**allpath;
+	char	*exec;
+	char	**s_cmd;
+	char	*path_env;
+
+	path_env = ft_getenv("PATH", env);
+	if (!path_env)
+		return (NULL);
+	allpath = ft_split(path_env, ':');
+	if (!allpath)
+		return (NULL);
+	s_cmd = ft_split(cmd, ' ');
+	if (!s_cmd || !s_cmd[0])
+	{
+		ft_free_tab(s_cmd);
+		ft_free_tab(allpath);
+		return (NULL);
+	}
+	exec = construct_exec_path(s_cmd[0], allpath);
+	ft_free_tab(s_cmd);
+	ft_free_tab(allpath);
+	return (exec);
 }

@@ -25,7 +25,7 @@
 
 int		main(int argc, char **argv, char **env);
 void	exec(char *cmd, char **env);
-void	enfant(char **av, int *pipe_fd, char **env);
+void	child(char **av, int *pipe_fd, char **env);
 void	parent(char **av, int *pipe_fd, char **env);
 void	exit_handler(int n_exit);
 int		open_file(char *file, int in_or_out);
